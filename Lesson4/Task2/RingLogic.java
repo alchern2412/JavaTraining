@@ -1,8 +1,6 @@
-package com.alchern.task4;
-
 public class RingLogic {
-	/*R1 - first radius, R2 - second radius*/
-    public static double findRingSquare(double R1, double R2) {
-        return Math.PI * (R1 * R1 - R2 * R2);	// first circle square - second square = ring square (easy :) )
+	/*r1 - first radius, r2 - second radius*/
+    public static double findRingSquare(double r1, double r2) {
+        return Math.PI * (r1 * r1 - r2 * r2);	// first circle square - second square = ring square (easy :) )
     }
 }
