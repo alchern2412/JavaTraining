@@ -37,6 +37,6 @@ public class DragonLogic {
     
     public static int findEyesCount(int age) {
         /*if age < 0 => return -1*/
-        return age > 0 ? findHeadCount(age) * 2 : -1;
+        return age >= 0 ? findHeadCount(age) * 2 : -1;
     }
 }

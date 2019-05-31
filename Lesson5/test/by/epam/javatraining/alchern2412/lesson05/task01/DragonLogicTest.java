@@ -10,6 +10,8 @@ import org.junit.Test;
 
 public class DragonLogicTest {
     
+    // heads count tests
+    
     /* 0 <= x < 200 */
     @Test
     public void testFindHeadCountUnderMark1() {
@@ -42,6 +44,9 @@ public class DragonLogicTest {
         assertEquals(expected, DragonLogic.findHeadCount(age));
     }
     
+    
+    
+    // Eyes count tests
     
     /* 0 <= x < 200 */
     @Test
