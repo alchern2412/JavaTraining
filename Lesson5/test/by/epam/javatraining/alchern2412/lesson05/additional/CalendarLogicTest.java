@@ -1,15 +1,88 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package by.epam.javatraining.alchern2412.lesson05.additional;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *
  * @author Alex
  */
-public class CalendarLogic {
+public class CalendarLogicTest {
+
+    @Test
+    public void testGetNextDay() {
+        int dd = 26;
+        int mm = 2;
+        int yy = 2019;
+
+        String expected = "27.2.2019";
+        assertEquals(expected, CalendarLogic.getNextDay(dd, mm, yy));
+
+    }
+
+    @Test
+    public void testGetNextDayALeapYear() {
+        int dd = 29;
+        int mm = 2;
+        int yy = 2008;
+
+        String expected = "1.3.2008";
+        assertEquals(expected, CalendarLogic.getNextDay(dd, mm, yy));
+
+    }
     
+     @Test
+    public void testGetNextDayNotALeapYear1() {
+        int dd = 29;
+        int mm = 2;
+        int yy = 2019;
+
+        String expected = "Error in day range [1 - 28|29|30|31], "
+                            + "depends month and year";
+        assertEquals(expected, CalendarLogic.getNextDay(dd, mm, yy));
+
+    }
+
+
+    @Test
+    public void testGetNextDayNotALeapYear2() {
+        int dd = 28;
+        int mm = 2;
+        int yy = 2019;
+
+        String expected = "1.3.2019";
+        assertEquals(expected, CalendarLogic.getNextDay(dd, mm, yy));
+
+    }
+
+    @Test
+    public void testGetNextDayFalseDay() {
+        int dd = -1;
+        int mm = 11;
+        int yy = 1999;
+
+        String expected = "Error in day range [1 - 28|29|30|31], "
+                + "depends month and year";
+        assertEquals(expected, CalendarLogic.getNextDay(dd, mm, yy));
+    }
+
+    @Test
+    public void testGetNextDayFalseMonth() {
+        int dd = 1;
+        int mm = 55;
+        int yy = 1999;
+
+        String expected = "Error in month range [1 - 12]";
+        assertEquals(expected, CalendarLogic.getNextDay(dd, mm, yy));
+    }
+
+    @Test
+    public void testGetNextDayFalseYear() {
+        int dd = 1;
+        int mm = 11;
+        int yy = -432;
+
+        String expected = "Error in year range [1 - ...]";
+        assertEquals(expected, CalendarLogic.getNextDay(dd, mm, yy));
+    }
 }

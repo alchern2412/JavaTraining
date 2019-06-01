@@ -8,7 +8,6 @@ public class CalendarLogic {
 
     private static final int MIN_COUNT = 1;
 
-    private static final int YEAR_MAX_COUNT = 9999;
     private static final int MONTH_MAX_COUNT = 12;
 
     private static final int DAY_COUNT30 = 30;
@@ -31,11 +30,11 @@ public class CalendarLogic {
 
     public static String getNextDay(int dd, int mm, int yy) {
         String result;
-        if (yy >= MIN_COUNT && yy <= YEAR_MAX_COUNT) {
+        if (yy >= MIN_COUNT) {
             if (mm >= MIN_COUNT && mm <= MONTH_MAX_COUNT) {
                 if ((mm == JANUARY || mm == MARCH || mm == MAY || mm == JULY
                         || mm == AUGUST || mm == OCTOBER || mm == DECEMBER)
-                        && dd <= DAY_COUNT31) {
+                        && dd >= MIN_COUNT && dd <= DAY_COUNT31) {
                     if (dd != DAY_COUNT31) {
                         dd++;
                     } else {
@@ -47,8 +46,10 @@ public class CalendarLogic {
                             yy++;
                         }
                     }
+                    result = dd + "." + mm + "." + yy;
                 } else if ((mm == APRIL || mm == JUNE || mm == SEPTEMBER
-                        || mm == NOVEMBER) && dd <= DAY_COUNT30) {
+                        || mm == NOVEMBER)
+                        && dd >= MIN_COUNT && dd <= DAY_COUNT30) {
                     if (dd != DAY_COUNT30) {
                         dd++;
                     } else {
@@ -60,8 +61,9 @@ public class CalendarLogic {
                             yy++;
                         }
                     }
+                    result = dd + "." + mm + "." + yy;
                 } else if (mm == FEBRUARY
-                        && dd <= DAY_COUNT29 && (yy % 4 == 0 && yy % 100 != 0
+                        && dd >= MIN_COUNT && dd <= DAY_COUNT29 && (yy % 4 == 0 && yy % 100 != 0
                         || yy % 4 == 0 && yy % 100 == 0 && yy % 400 == 0)) {
                     if (dd != DAY_COUNT29) {
                         dd++;
@@ -74,8 +76,8 @@ public class CalendarLogic {
                             yy++;
                         }
                     }
-                } else if (mm == FEBRUARY && dd <= DAY_COUNT28
-                        && (yy % 4 == 0 && yy % 100 == 0 && yy % 400 != 0)) {
+                    result = dd + "." + mm + "." + yy;
+                } else if (mm == FEBRUARY && dd >= MIN_COUNT && dd <= DAY_COUNT28) {
                     if (dd != DAY_COUNT28) {
                         dd++;
                     } else {
@@ -87,10 +89,12 @@ public class CalendarLogic {
                             yy++;
                         }
                     }
+                    result = dd + "." + mm + "." + yy;
                 } else {
-                    result = "Error in day range [1 - 28|29|30|31], depends month";
+                    result = "Error in day range [1 - 28|29|30|31], "
+                            + "depends month and year";
                 }
-                result = dd + "." + mm + "." + yy;
+                
 
             } else {
                 result = "Error in month range [1 - 12]";
@@ -98,7 +102,7 @@ public class CalendarLogic {
             }
 
         } else {
-            result = "Error in year range [1 - 9999]";
+            result = "Error in year range [1 - ...]";
         }
         return result;
     }
