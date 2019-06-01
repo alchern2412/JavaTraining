@@ -14,8 +14,9 @@ public class LetterLogic {
                 || letter == 'Y' || letter == 'U' || letter == 'I';
     }
     
-        public static boolean isVowel2(char letter) {
-            letter = Character.toLowerCase(letter);
+    public static boolean isVowel2(char letter) {
+        // or toUpperCase check equality with AEOYUI
+        letter = Character.toLowerCase(letter); 
         return letter == 'a' || letter == 'e' || letter == 'o' 
                 || letter == 'y' || letter == 'u' || letter == 'i' ;
     }
