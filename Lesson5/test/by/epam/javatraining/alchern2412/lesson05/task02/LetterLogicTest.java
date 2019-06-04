@@ -62,4 +62,52 @@ public class LetterLogicTest {
 
         assertEquals(expected, LetterLogic.isVowel3(letter));
     }
+
+    @Test
+    public void testIsVowel4True() {
+        char letter = 'a';
+        boolean expected = true;
+
+        assertEquals(expected, LetterLogic.isVowel3(letter));
+    }
+
+    @Test
+    public void testIsVowel4False() {
+        char letter = 'b';
+        boolean expected = false;
+
+        assertEquals(expected, LetterLogic.isVowel3(letter));
+    }
+
+    @Test
+    public void testIsVowel5True() {
+        char letter = 'a';
+        boolean expected = true;
+
+        assertEquals(expected, LetterLogic.isVowel3(letter));
+    }
+
+    @Test
+    public void testIsVowel5False() {
+        char letter = 'b';
+        boolean expected = false;
+
+        assertEquals(expected, LetterLogic.isVowel3(letter));
+    }
+    
+    @Test
+    public void testIsVowel6True() {
+        char letter = 'a';
+        boolean expected = true;
+
+        assertEquals(expected, LetterLogic.isVowel3(letter));
+    }
+
+    @Test
+    public void testIsVowel6False() {
+        char letter = 'b';
+        boolean expected = false;
+
+        assertEquals(expected, LetterLogic.isVowel3(letter));
+    }
 }

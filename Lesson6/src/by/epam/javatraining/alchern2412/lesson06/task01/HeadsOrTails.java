@@ -8,7 +8,8 @@ import java.util.Random;
  */
 public class HeadsOrTails {
 
-    private static Random rand = new Random();
+    private static final Random RND = new Random();
+    private static final int SIDE_COUNT = 2;
 
     public static int headsCount(int shotsNumber) throws Exception {
         if(shotsNumber < 0) {
@@ -16,7 +17,7 @@ public class HeadsOrTails {
         }
         int result = 0;
         for (int i = 0; i < shotsNumber; ++i) {
-            if (rand.nextInt(2) == 0) {
+            if (RND.nextInt(SIDE_COUNT) == 0) {
                 result++;
             }
         }

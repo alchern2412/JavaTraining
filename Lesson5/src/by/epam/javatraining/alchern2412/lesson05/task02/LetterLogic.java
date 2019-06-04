@@ -6,6 +6,8 @@ package by.epam.javatraining.alchern2412.lesson05.task02;
  */
 public class LetterLogic {
 
+    private static final String TEMPLATE = "eyuioaEYUIOA";
+
     public static boolean isVowel1(char letter) {
 
         return letter == 'a' || letter == 'e' || letter == 'o'
@@ -22,6 +24,33 @@ public class LetterLogic {
     }
 
     public static boolean isVowel3(char letter) {
-        return "eyuioaEYUIOA".indexOf(letter) != -1;
+        return TEMPLATE.indexOf(letter) != -1;
+    }
+
+    public static boolean isVowel4(char letter) {
+        return TEMPLATE.contains(Character.toString(letter));
+    }
+
+    public static boolean isVowel5(char letter) {
+        Character.toLowerCase(letter);
+        switch (letter) {
+            case 'a':
+            case 'e':
+            case 'y':
+            case 'u':
+            case 'i':
+            case 'o':
+                return true;
+        }
+        return false;
+    }
+
+    public static boolean isVowel6(char letter) {
+        for (char let : TEMPLATE.toCharArray()) {
+            if (let == letter) {
+                return true;
+            }
+        }
+        return false;
     }
 }

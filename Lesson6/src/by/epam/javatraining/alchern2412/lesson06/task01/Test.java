@@ -14,9 +14,11 @@ import by.epam.javatraining.alchern2412.lesson06.View;
 public class Test {
 
     public static void main(String[] args) throws Exception {
+        
         int number = 1000;
-
         int headCount = HeadsOrTails.headsCount(number);
+        
+        /*Count of Tails can know by number substr. Heads count*/
         
         View.print("Number: " + number + ", head count: " + headCount + ", "
         + "tail count: " + (number - headCount));
