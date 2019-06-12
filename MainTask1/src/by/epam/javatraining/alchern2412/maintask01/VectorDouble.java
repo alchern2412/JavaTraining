@@ -561,4 +561,17 @@ public class VectorDouble {
             sortQuickDesc(array, i, high);
         }
     }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (int i = 0; i < vector.length; i++) {
+            if (i == vector.length - 1) {
+                result += vector[i];
+                break;
+            }
+            result += vector[i] + ", ";
+        }
+        return result;
+    }
 }
