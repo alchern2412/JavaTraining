@@ -245,16 +245,14 @@ public class VectorDouble {
     }
 
     // sort algorithms
-    
     //bubble
-    
     public VectorDouble sortBubble() throws Exception {
         logger.info("Method sortBubble()");
         if (vector == null) {
             logger.error("vector can't be null");
             throw new Exception("vector can't be null");
-        }   
-        
+        }
+
         boolean isSorted = false;
         double buf;
         while (!isSorted) {
@@ -276,8 +274,8 @@ public class VectorDouble {
         if (vector == null) {
             logger.error("vector can't be null");
             throw new Exception("vector can't be null");
-        } 
-        
+        }
+
         boolean isSorted = false;
         double buf;
         while (!isSorted) {
@@ -293,15 +291,15 @@ public class VectorDouble {
         }
         return this;
     }
-    
+
     // insertion sort
     public VectorDouble sortInsertion() throws Exception {
-        logger.info("Method sortBubbleDesc()");
+        logger.info("Method sortInsertion()");
         if (vector == null) {
             logger.error("vector can't be null");
             throw new Exception("vector can't be null");
-        } 
-        
+        }
+
         double key;
         for (int i = 1; i < vector.length; i++) {
             key = vector[i];
@@ -313,15 +311,15 @@ public class VectorDouble {
             vector[j + 1] = key;
         }
         return this;
-    }    
-    
+    }
+
     public VectorDouble sortInsertionDesc() throws Exception {
-        logger.info("Method sortBubbleDesc()");
+        logger.info("Method sortInsertionDesc()");
         if (vector == null) {
             logger.error("vector can't be null");
             throw new Exception("vector can't be null");
-        } 
-        
+        }
+
         double key;
         for (int i = 1; i < vector.length; i++) {
             key = vector[i];
@@ -333,11 +331,234 @@ public class VectorDouble {
             vector[j + 1] = key;
         }
         return this;
-    }    
-    
-    
-    
-    
-    
+    }
 
+    // selection sort
+    public VectorDouble sortSelection() throws Exception {
+        logger.info("Method sortSelection()");
+        if (vector == null) {
+            logger.error("vector can't be null");
+            throw new Exception("vector can't be null");
+        }
+
+        for (int i = 0; i < vector.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < vector.length; j++) {
+                if (vector[j] < vector[min]) {
+                    min = j;
+                }
+            }
+            if (min != i) {
+                double tmp = vector[min];
+                vector[min] = vector[i];
+                vector[i] = tmp;
+            }
+        }
+        return this;
+    }
+
+    public VectorDouble sortSelectionDesc() throws Exception {
+        logger.info("Method sortSelectionDesc()");
+        if (vector == null) {
+            logger.error("vector can't be null");
+            throw new Exception("vector can't be null");
+        }
+
+        for (int i = 0; i < vector.length - 1; i++) {
+            int max = i;
+            for (int j = i + 1; j < vector.length; j++) {
+                if (vector[j] > vector[max]) {
+                    max = j;
+                }
+            }
+            if (max != i) {
+                double tmp = vector[max];
+                vector[max] = vector[i];
+                vector[i] = tmp;
+            }
+        }
+        return this;
+    }
+
+    // merge sort
+    public VectorDouble sortMerge() {
+        double[] tmpArray = new double[vector.length];
+        sortMerge(vector, tmpArray, 0, vector.length - 1);
+
+        return this;
+    }
+
+    private static void sortMerge(double[] a, double[] tmpArray,
+            int left, int right) {
+        if (left < right) {
+            int center = (left + right) / 2;
+            sortMerge(a, tmpArray, left, center);
+            sortMerge(a, tmpArray, center + 1, right);
+            merge(a, tmpArray, left, center + 1, right);
+        }
+    }
+
+    private static void merge(double[] a, double[] tmpArray,
+            int leftPos, int rightPos, int rightEnd) {
+        int leftEnd = rightPos - 1;
+        int tmpPos = leftPos;
+        int numElements = rightEnd - leftPos + 1;
+        // Main loop
+        while (leftPos <= leftEnd && rightPos <= rightEnd) {
+            if (a[leftPos] <= a[rightPos]) {
+                tmpArray[ tmpPos++] = a[ leftPos++];
+            } else {
+                tmpArray[ tmpPos++] = a[ rightPos++];
+            }
+        }
+
+        while (leftPos <= leftEnd) {
+            tmpArray[ tmpPos++] = a[ leftPos++];
+        }
+
+        while (rightPos <= rightEnd) {
+            tmpArray[ tmpPos++] = a[ rightPos++];
+        }
+
+        // Copy tmpArray back
+        for (int i = 0; i < numElements; i++, rightEnd--) {
+            a[ rightEnd] = tmpArray[ rightEnd];
+        }
+
+    }
+
+    public VectorDouble sortMergeDesc() {
+        double[] tmpArray = new double[vector.length];
+        sortMergeDesc(vector, tmpArray, 0, vector.length - 1);
+
+        return this;
+    }
+
+    private static void sortMergeDesc(double[] a, double[] tmpArray,
+            int left, int right) {
+        if (left < right) {
+            int center = (left + right) / 2;
+            sortMergeDesc(a, tmpArray, left, center);
+            sortMergeDesc(a, tmpArray, center + 1, right);
+            mergeDesc(a, tmpArray, left, center + 1, right);
+        }
+    }
+
+    private static void mergeDesc(double[] a, double[] tmpArray,
+            int leftPos, int rightPos, int rightEnd) {
+        int leftEnd = rightPos - 1;
+        int tmpPos = leftPos;
+        int numElements = rightEnd - leftPos + 1;
+        // Main loop
+        while (leftPos <= leftEnd && rightPos <= rightEnd) {
+            if (a[leftPos] >= a[rightPos]) {
+                tmpArray[ tmpPos++] = a[ leftPos++];
+            } else {
+                tmpArray[ tmpPos++] = a[ rightPos++];
+            }
+        }
+
+        while (leftPos <= leftEnd) {
+            tmpArray[ tmpPos++] = a[ leftPos++];
+        }
+
+        while (rightPos <= rightEnd) {
+            tmpArray[ tmpPos++] = a[ rightPos++];
+        }
+
+        // Copy tmpArray back
+        for (int i = 0; i < numElements; i++, rightEnd--) {
+            a[ rightEnd] = tmpArray[ rightEnd];
+        }
+
+    }
+
+    // quick sort
+    public VectorDouble sortQuick() {
+        sortQuick(vector, 0, vector.length - 1);
+        return this;
+    }
+
+    private static void sortQuick(double[] array, int low, int high) {
+        if (array.length == 0) {
+            return;
+        }
+        if (low >= high) {
+            return;
+        }
+        // select flag element
+        int middle = low + (high - low) / 2;
+        double flag = array[middle];
+
+        int i = low, j = high;
+        while (i <= j) {
+            while (array[i] < flag) {
+                i++;
+            }
+
+            while (array[j] > flag) {
+                j--;
+            }
+
+            if (i <= j) {   //swap
+                double temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
+            }
+        }
+
+        if (low < j) {
+            sortQuick(array, low, j);
+        }
+
+        if (high > i) {
+            sortQuick(array, i, high);
+        }
+    }
+
+    public VectorDouble sortQuickDesc() {
+        sortQuickDesc(vector, 0, vector.length - 1);
+        return this;
+    }
+
+    private static void sortQuickDesc(double[] array, int low, int high) {
+        if (array.length == 0) {
+            return;
+        }
+        if (low >= high) {
+            return;
+        }
+        // select flag element
+        int middle = low + (high - low) / 2;
+        double flag = array[middle];
+
+        int i = low, j = high;
+        while (i <= j) {
+            while (array[i] > flag) {
+                i++;
+            }
+
+            while (array[j] < flag) {
+                j--;
+            }
+
+            if (i <= j) {   //swap
+                double temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
+            }
+        }
+
+        if (low < j) {
+            sortQuickDesc(array, low, j);
+        }
+
+        if (high > i) {
+            sortQuickDesc(array, i, high);
+        }
+    }
 }

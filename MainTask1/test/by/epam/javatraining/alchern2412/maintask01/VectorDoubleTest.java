@@ -1,7 +1,8 @@
 package by.epam.javatraining.alchern2412.maintask01;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  *
@@ -309,6 +310,80 @@ public class VectorDoubleTest {
             assertEquals(expResult[i], tmp.get(i), 0.000000001);
         }
     }
+    
+    //selection
+    
+    @Test
+    public void testSortSelection() throws Exception {
+        double[] vector = {1.0, 4.0, 10.0, 2.0};
+        vectorDouble = new VectorDouble(vector);
+        double[] expResult = {1.0, 2.0, 4.0, 10.0};
+        VectorDouble tmp = vectorDouble.sortSelection();
+        for (int i = 0; i < vectorDouble.getLength(); i++) {
+            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+        }
+    }
+    
+    @Test
+    public void testSortSelectionDesc() throws Exception {
+        double[] vector = {1.0, 4.0, 10.0, 2.0};
+        vectorDouble = new VectorDouble(vector);
+        double[] expResult = {10.0, 4.0, 2.0, 1.0};
+        VectorDouble tmp = vectorDouble.sortSelectionDesc();
+        for (int i = 0; i < vectorDouble.getLength(); i++) {
+            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+        }
+    }
+    
+    //merge
+    
+    @Test
+    public void testSortMerge() throws Exception {
+        double[] vector = {1.0, 4.0, 10.0, 2.0};
+        vectorDouble = new VectorDouble(vector);
+        double[] expResult = {1.0, 2.0, 4.0, 10.0};
+        VectorDouble tmp = vectorDouble.sortMerge();
+        for (int i = 0; i < vectorDouble.getLength(); i++) {
+            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+        }
+    }
+    
+    
+    @Test
+    public void testSortMergeDesc() throws Exception {
+        double[] vector = {1.0, 4.0, 10.0, 2.0};
+        vectorDouble = new VectorDouble(vector);
+        double[] expResult = {10.0, 4.0, 2.0, 1.0};
+        VectorDouble tmp = vectorDouble.sortMergeDesc();
+        for (int i = 0; i < vectorDouble.getLength(); i++) {
+            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+        }
+    }
+    
+    //quick
+    
+    @Test
+    public void testSortQuick() throws Exception {
+        double[] vector = {1.0, 4.0, 10.0, 2.0};
+        vectorDouble = new VectorDouble(vector);
+        double[] expResult = {1.0, 2.0, 4.0, 10.0};
+        VectorDouble tmp = vectorDouble.sortQuick();
+        for (int i = 0; i < vectorDouble.getLength(); i++) {
+            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+        }
+    }
+
+    @Test
+    public void testSortQuickDesc() throws Exception {
+        double[] vector = {1.0, 4.0, 10.0, 2.0};
+        vectorDouble = new VectorDouble(vector);
+        double[] expResult = {10.0, 4.0, 2.0, 1.0};
+        VectorDouble tmp = vectorDouble.sortQuickDesc();
+        for (int i = 0; i < vectorDouble.getLength(); i++) {
+            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+        }
+    }   
+    
     
     
 }
