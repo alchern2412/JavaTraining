@@ -265,7 +265,7 @@ public class VectorDoubleTest {
     // sorts
     //bubble
     @Test
-    public void testBubbleSort() throws Exception {
+    public void testSortBubble() throws Exception {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {1.0, 2.0, 4.0, 10.0};
@@ -276,7 +276,7 @@ public class VectorDoubleTest {
     }
     
     @Test
-    public void testBubbleSortDesc() throws Exception {
+    public void testSortBubbleDesc() throws Exception {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {10.0, 4.0, 2.0, 1.0};
@@ -286,4 +286,29 @@ public class VectorDoubleTest {
         }
     }
 
+    //insertion
+    
+    @Test
+    public void testSortInsertion() throws Exception {
+        double[] vector = {1.0, 4.0, 10.0, 2.0};
+        vectorDouble = new VectorDouble(vector);
+        double[] expResult = {1.0, 2.0, 4.0, 10.0};
+        VectorDouble tmp = vectorDouble.sortInsertion();
+        for (int i = 0; i < vectorDouble.getLength(); i++) {
+            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+        }
+    }
+    
+    @Test
+    public void testSortInsertionDesc() throws Exception {
+        double[] vector = {1.0, 4.0, 10.0, 2.0};
+        vectorDouble = new VectorDouble(vector);
+        double[] expResult = {10.0, 4.0, 2.0, 1.0};
+        VectorDouble tmp = vectorDouble.sortInsertionDesc();
+        for (int i = 0; i < vectorDouble.getLength(); i++) {
+            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+        }
+    }
+    
+    
 }

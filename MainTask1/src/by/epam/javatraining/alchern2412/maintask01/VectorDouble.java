@@ -295,9 +295,45 @@ public class VectorDouble {
     }
     
     // insertion sort
+    public VectorDouble sortInsertion() throws Exception {
+        logger.info("Method sortBubbleDesc()");
+        if (vector == null) {
+            logger.error("vector can't be null");
+            throw new Exception("vector can't be null");
+        } 
+        
+        double key;
+        for (int i = 1; i < vector.length; i++) {
+            key = vector[i];
+            int j = i - 1;
+            while (j >= 0 && vector[j] > key) {
+                vector[j + 1] = vector[j];
+                j = j - 1;
+            }
+            vector[j + 1] = key;
+        }
+        return this;
+    }    
     
-    
-    
+    public VectorDouble sortInsertionDesc() throws Exception {
+        logger.info("Method sortBubbleDesc()");
+        if (vector == null) {
+            logger.error("vector can't be null");
+            throw new Exception("vector can't be null");
+        } 
+        
+        double key;
+        for (int i = 1; i < vector.length; i++) {
+            key = vector[i];
+            int j = i - 1;
+            while (j >= 0 && vector[j] < key) {
+                vector[j + 1] = vector[j];
+                j = j - 1;
+            }
+            vector[j + 1] = key;
+        }
+        return this;
+    }    
     
     
     
