@@ -53,7 +53,7 @@ public class VectorDouble {
     }
 
     public double findMax() throws Exception {
-        logger.info("Method findMax(double ... vector)");
+        logger.debug("Method findMax(double ... vector)");
         if (vector == null) {
             logger.error("vector can't be null");
             throw new Exception("vector can't be null");
@@ -69,7 +69,7 @@ public class VectorDouble {
     }
 
     public double findMin() throws Exception {
-        logger.info("Method findMin(double ... vector)");
+        logger.debug("Method findMin(double ... vector)");
         if (vector == null) {
             logger.error("vector can't be null");
             throw new Exception("vector can't be null");
@@ -85,7 +85,7 @@ public class VectorDouble {
     }
 
     public double findArithmeticMean() throws Exception {
-        logger.info("Method findArithmAverage(double... vector)");
+        logger.debug("Method findArithmAverage(double... vector)");
         if (vector == null) {
             logger.error("vector can't be null");
             throw new Exception("vector can't be null");
@@ -98,7 +98,7 @@ public class VectorDouble {
     }
 
     public double findGeometricMean() throws Exception {
-        logger.info("Method findArithmAverage(double... vector)");
+        logger.debug("Method findArithmAverage(double... vector)");
         if (vector == null) {
             logger.error("vector can't be null");
             throw new Exception("vector can't be null");
@@ -111,11 +111,11 @@ public class VectorDouble {
     }
 
     /*check vector by asc/desc sorting */
-    public boolean isSorted() throws Exception {
-        logger.info("Method isSorted(double... vector)");
+    public boolean isSorted() {
+        logger.debug("Method isSorted(double... vector)");
         if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
+            logger.warn("vector can't be null");
+            return false;
         }
 
         if (vector.length == 1) {
@@ -133,15 +133,16 @@ public class VectorDouble {
         return true;
     }
 
-    public int findLocalMin() throws Exception {
-        logger.info("Method findLocalMin(double[] vector)");
-        if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
-        }
+    public int findLocalMin() {
+        logger.debug("Method findLocalMin(double[] vector)");
+
         final int MIN_LENGTH = 3;
 
         int index = NOT_FOUND_IND;
+        if (vector == null) {
+            logger.warn("vector can't be null");
+            return index;
+        }
         if (vector.length < MIN_LENGTH) {
             return index;
         }
@@ -155,15 +156,15 @@ public class VectorDouble {
         return index;
     }
 
-    public int findLocalMax() throws Exception {
-        logger.info("Method findLocalMaxdouble[] vector)");
-        if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
-        }
+    public int findLocalMax() {
+        logger.debug("Method findLocalMaxdouble[] vector)");
         final int MIN_LENGTH = 3;
 
         int index = NOT_FOUND_IND;
+        if (vector == null) {
+            logger.warn("vector can't be null");
+            return index;
+        }
         if (vector.length < MIN_LENGTH) {
             return index;
         }
@@ -176,15 +177,14 @@ public class VectorDouble {
         return index;
     }
 
-    public int findElementLinear(double element) throws Exception {
-        logger.info("Method findLocalMaxdouble[] vector)");
-        if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
-        }
+    public int findElementLinear(double element) {
+        logger.debug("Method findLocalMaxdouble[] vector)");
 
         int index = NOT_FOUND_IND;
-
+        if (vector == null) {
+            logger.warn("vector can't be null");
+            return index;
+        }
         for (int i = 0; i < vector.length; i++) {
             if (vector[i] == element) {
                 index = i;
@@ -194,43 +194,44 @@ public class VectorDouble {
         return index;
     }
 
-    public int findElementBinary(double element) throws Exception {
-        logger.info("Method findLocalMaxdouble[] vector)");
+    public int findElementBinary(double element) {
+        logger.debug("Method findElementBinary()");
+        int index = NOT_FOUND_IND;
         if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
+            logger.warn("vector can't be null");
+            return index;
         }
         Arrays.sort(vector);
 
         int first = 0;
         int last = vector.length - 1;
         int position = (last - first) / HALF_DIVIDER;
-        int index = NOT_FOUND_IND;
+        
 
         logger.debug("start index:" + index);
 
         while (vector[position] != element && first <= last) {
-            logger.info("position start:" + position);
+            logger.debug("position start:" + position);
             if (vector[position] > element) {
                 last = position - 1;
             } else {
                 first = position + 1;
             }
             position = (first + last) / HALF_DIVIDER;
-            logger.info("position end:" + position);
+            logger.debug("position end:" + position);
         }
-        logger.info("position result:" + position);
+        logger.debug("position result:" + position);
         if (first <= last) {
             index = position;
         }
         return index;
     }
 
-    public VectorDouble reverse() throws Exception {
-        logger.info("Method reverse(double[] vector)");
+    public void reverse() {
+        logger.debug("Method reverse()");
         if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
+            logger.warn("vector can't be null");
+            return;
         }
 
         for (int i = 0, j = vector.length - 1;
@@ -241,16 +242,15 @@ public class VectorDouble {
             vector[j] = tmp;
         }
 
-        return this;
     }
 
     // sort algorithms
     //bubble
-    public VectorDouble sortBubble() throws Exception {
-        logger.info("Method sortBubble()");
+    public void sortBubble() {
+        logger.debug("Method sortBubble()");
         if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
+            logger.warn("vector can't be null");
+            return;
         }
 
         boolean isSorted = false;
@@ -266,14 +266,14 @@ public class VectorDouble {
                 }
             }
         }
-        return this;
+
     }
 
-    public VectorDouble sortBubbleDesc() throws Exception {
-        logger.info("Method sortBubbleDesc()");
+    public void sortBubbleDesc() {
+        logger.debug("Method sortBubbleDesc()");
         if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
+            logger.warn("vector can't be null");
+            return;
         }
 
         boolean isSorted = false;
@@ -289,15 +289,15 @@ public class VectorDouble {
                 }
             }
         }
-        return this;
+
     }
 
     // insertion sort
-    public VectorDouble sortInsertion() throws Exception {
-        logger.info("Method sortInsertion()");
+    public void sortInsertion() {
+        logger.debug("Method sortInsertion()");
         if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
+            logger.warn("vector can't be null");
+            return;
         }
 
         double key;
@@ -310,14 +310,14 @@ public class VectorDouble {
             }
             vector[j + 1] = key;
         }
-        return this;
+
     }
 
-    public VectorDouble sortInsertionDesc() throws Exception {
-        logger.info("Method sortInsertionDesc()");
+    public void sortInsertionDesc() {
+        logger.debug("Method sortInsertionDesc()");
         if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
+            logger.warn("vector can't be null");
+            return;
         }
 
         double key;
@@ -330,15 +330,15 @@ public class VectorDouble {
             }
             vector[j + 1] = key;
         }
-        return this;
+
     }
 
     // selection sort
-    public VectorDouble sortSelection() throws Exception {
-        logger.info("Method sortSelection()");
+    public void sortSelection() {
+        logger.debug("Method sortSelection()");
         if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
+            logger.warn("vector can't be null");
+            return;
         }
 
         for (int i = 0; i < vector.length - 1; i++) {
@@ -354,14 +354,14 @@ public class VectorDouble {
                 vector[i] = tmp;
             }
         }
-        return this;
+
     }
 
-    public VectorDouble sortSelectionDesc() throws Exception {
-        logger.info("Method sortSelectionDesc()");
+    public void sortSelectionDesc() {
+        logger.debug("Method sortSelectionDesc()");
         if (vector == null) {
-            logger.error("vector can't be null");
-            throw new Exception("vector can't be null");
+            logger.warn("vector can't be null");
+            return;
         }
 
         for (int i = 0; i < vector.length - 1; i++) {
@@ -377,15 +377,14 @@ public class VectorDouble {
                 vector[i] = tmp;
             }
         }
-        return this;
+
     }
 
     // merge sort
-    public VectorDouble sortMerge() {
+    public void sortMerge() {
         double[] tmpArray = new double[vector.length];
         sortMerge(vector, tmpArray, 0, vector.length - 1);
 
-        return this;
     }
 
     private static void sortMerge(double[] a, double[] tmpArray,
@@ -427,11 +426,10 @@ public class VectorDouble {
 
     }
 
-    public VectorDouble sortMergeDesc() {
+    public void sortMergeDesc() {
         double[] tmpArray = new double[vector.length];
         sortMergeDesc(vector, tmpArray, 0, vector.length - 1);
 
-        return this;
     }
 
     private static void sortMergeDesc(double[] a, double[] tmpArray,
@@ -474,9 +472,9 @@ public class VectorDouble {
     }
 
     // quick sort
-    public VectorDouble sortQuick() {
+    public void sortQuick() {
         sortQuick(vector, 0, vector.length - 1);
-        return this;
+
     }
 
     private static void sortQuick(double[] array, int low, int high) {
@@ -518,9 +516,9 @@ public class VectorDouble {
         }
     }
 
-    public VectorDouble sortQuickDesc() {
+    public void sortQuickDesc() {
         sortQuickDesc(vector, 0, vector.length - 1);
-        return this;
+
     }
 
     private static void sortQuickDesc(double[] array, int low, int high) {

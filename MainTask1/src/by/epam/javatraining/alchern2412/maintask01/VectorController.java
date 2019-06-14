@@ -21,9 +21,11 @@ public class VectorController {
         vd.set(777, index);
         View.print(vd.get(index));
         
-        View.print(vd.sortInsertion());
+        vd.sortInsertion();
+        View.print(vd);
         
-        View.print(vd.sortMergeDesc());
+        vd.sortMergeDesc();
+        View.print(vd);
         
         View.print(vd.findMax());
         

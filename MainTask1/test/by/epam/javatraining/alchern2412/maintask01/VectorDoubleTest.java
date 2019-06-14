@@ -128,7 +128,7 @@ public class VectorDoubleTest {
 
     //3 is sorted?
     @Test
-    public void testIsSortedAsc() throws Exception {
+    public void testIsSortedAsc() {
         double[] vector = {1.0, 4.0, 6.0, 22.0};
         vectorDouble = new VectorDouble(vector);
         boolean expResult = true;
@@ -137,7 +137,7 @@ public class VectorDoubleTest {
     }
 
     @Test
-    public void testIsSortedDesc() throws Exception {
+    public void testIsSortedDesc() {
         double[] vector = {100.0, 40.0, 6.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         boolean expResult = true;
@@ -146,7 +146,7 @@ public class VectorDoubleTest {
     }
 
     @Test
-    public void testIsSortedFalse() throws Exception {
+    public void testIsSortedFalse() {
         double[] vector = {1.0, 14.0, 6.0, 22.0};
         vectorDouble = new VectorDouble(vector);
         boolean expResult = false;
@@ -155,7 +155,7 @@ public class VectorDoubleTest {
     }
 
     @Test
-    public void testIsSortedOneNumber() throws Exception {
+    public void testIsSortedOneNumber() {
         double[] vector = {10.0};
         vectorDouble = new VectorDouble(vector);
         boolean expResult = true;
@@ -163,16 +163,18 @@ public class VectorDoubleTest {
         assertEquals(expResult, result);
     }
 
-    @Test(expected = Exception.class)
-    public void testIsSortedNullCheck() throws Exception {
+    @Test
+    public void testIsSortedNullCheck() {
         double[] vector = null;
         vectorDouble = new VectorDouble(vector);
-        vectorDouble.isSorted();
+        boolean expResult = false;
+        boolean result = vectorDouble.isSorted();
+        assertEquals(expResult, result);
     }
 
     // 4. find local min/max
     @Test
-    public void testFindLocalMin() throws Exception {
+    public void testFindLocalMin() {
         double[] vector = {1.0, 4.0, 3.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         int expResult = 2;
@@ -181,7 +183,7 @@ public class VectorDoubleTest {
     }
 
     @Test
-    public void testFindLocalMinNotFound() throws Exception {
+    public void testFindLocalMinNotFound() {
         double[] vector = {1.0, 4.0, 6.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         int expResult = -1;
@@ -189,15 +191,17 @@ public class VectorDoubleTest {
         assertEquals(expResult, result);
     }
 
-    @Test(expected = Exception.class)
-    public void testFindLocalMinNullCheck() throws Exception {
+    @Test
+    public void testFindLocalMinNullCheck() {
         double[] vector = null;
         vectorDouble = new VectorDouble(vector);
-        vectorDouble.findLocalMin();
+        int expResult = -1;
+        int result = vectorDouble.findLocalMin();
+        assertEquals(expResult, result);
     }
 
     @Test
-    public void testFindLocalMax() throws Exception {
+    public void testFindLocalMax() {
         double[] vector = {1.0, 4.0, 3.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         int expResult = 1;
@@ -206,7 +210,7 @@ public class VectorDoubleTest {
     }
 
     @Test
-    public void testFindLocalMaxNotFound() throws Exception {
+    public void testFindLocalMaxNotFound() {
         double[] vector = {1.0, 4.0, 6.0, 10.0, 20.0};
         vectorDouble = new VectorDouble(vector);
         int expResult = -1;
@@ -214,16 +218,18 @@ public class VectorDoubleTest {
         assertEquals(expResult, result);
     }
 
-    @Test(expected = Exception.class)
-    public void testFindLocalMaxNullCheck() throws Exception {
+    @Test
+    public void testFindLocalMaxNullCheck() {
         double[] vector = null;
         vectorDouble = new VectorDouble(vector);
-        vectorDouble.findLocalMax();
+        int expResult = -1;
+        int result = vectorDouble.findLocalMax();
+        assertEquals(expResult, result);
     }
 
     // linear search
     @Test
-    public void testFindElementLinear() throws Exception {
+    public void testFindElementLinear() {
         double[] vector = {1.0, 4.0, 3.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double element = 3.0;
@@ -233,7 +239,7 @@ public class VectorDoubleTest {
     }
 
     @Test
-    public void testFindElementLinearNotFound() throws Exception {
+    public void testFindElementLinearNotFound() {
         double[] vector = {1.0, 4.0, 3.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double element = 111;
@@ -242,17 +248,19 @@ public class VectorDoubleTest {
         assertEquals(expResult, result);
     }
 
-    @Test(expected = Exception.class)
-    public void testFindElementLinearNullCheck() throws Exception {
+    @Test
+    public void testFindElementLinearNullCheck() {
         double[] vector = null;
         vectorDouble = new VectorDouble(vector);
         double element = 111;
-        vectorDouble.findElementLinear(element);
+        int expResult = -1;
+        int result = vectorDouble.findElementLinear(element);
+        assertEquals(expResult, result);
     }
 
     // binary search
     @Test
-    public void testFindElementBinary() throws Exception {
+    public void testFindElementBinary() {
         double[] vector = {1.0, 4.0, 3.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double element = 3.0;
@@ -262,7 +270,7 @@ public class VectorDoubleTest {
     }
 
     @Test
-    public void testFindElementBinaryNotFound() throws Exception {
+    public void testFindElementBinaryNotFound() {
         double[] vector = {1.0, 4.0, 3.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double element = 111;
@@ -271,12 +279,14 @@ public class VectorDoubleTest {
         assertEquals(expResult, result);
     }
 
-    @Test(expected = Exception.class)
-    public void testFindElementBinaryNullCheck() throws Exception {
+    @Test
+    public void testFindElementBinaryNullCheck() {
         double[] vector = null;
         vectorDouble = new VectorDouble(vector);
         double element = 111;
-        vectorDouble.findElementBinary(element);
+        int expResult = -1;
+        int result = vectorDouble.findElementBinary(element);
+        assertEquals(expResult, result);
     }
 
     // . reverse
@@ -285,9 +295,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {2.0, 10.0, 4.0, 1.0};
-        VectorDouble tmp = vectorDouble.reverse();
+        vectorDouble.reverse();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -296,14 +306,14 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 15.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {2.0, 10.0, 15.0, 4.0, 1.0};
-        VectorDouble tmp = vectorDouble.reverse();
+        vectorDouble.reverse();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
-    @Test(expected = Exception.class)
-    public void testReverseNullCheck() throws Exception {
+    @Test
+    public void testReverseNullCheck() {
         double[] vector = null;
         vectorDouble = new VectorDouble(vector);
         vectorDouble.reverse();
@@ -316,9 +326,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {1.0, 2.0, 4.0, 10.0};
-        VectorDouble tmp = vectorDouble.sortBubble();
+        vectorDouble.sortBubble();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -327,9 +337,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {10.0, 4.0, 2.0, 1.0};
-        VectorDouble tmp = vectorDouble.sortBubbleDesc();
+        vectorDouble.sortBubbleDesc();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -339,9 +349,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {1.0, 2.0, 4.0, 10.0};
-        VectorDouble tmp = vectorDouble.sortInsertion();
+        vectorDouble.sortInsertion();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -350,9 +360,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {10.0, 4.0, 2.0, 1.0};
-        VectorDouble tmp = vectorDouble.sortInsertionDesc();
+        vectorDouble.sortInsertionDesc();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -362,9 +372,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {1.0, 2.0, 4.0, 10.0};
-        VectorDouble tmp = vectorDouble.sortSelection();
+        vectorDouble.sortSelection();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -373,9 +383,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {10.0, 4.0, 2.0, 1.0};
-        VectorDouble tmp = vectorDouble.sortSelectionDesc();
+        vectorDouble.sortSelectionDesc();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -385,9 +395,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {1.0, 2.0, 4.0, 10.0};
-        VectorDouble tmp = vectorDouble.sortMerge();
+        vectorDouble.sortMerge();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -396,9 +406,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {10.0, 4.0, 2.0, 1.0};
-        VectorDouble tmp = vectorDouble.sortMergeDesc();
+        vectorDouble.sortMergeDesc();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -408,9 +418,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {1.0, 2.0, 4.0, 10.0};
-        VectorDouble tmp = vectorDouble.sortQuick();
+        vectorDouble.sortQuick();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
@@ -419,9 +429,9 @@ public class VectorDoubleTest {
         double[] vector = {1.0, 4.0, 10.0, 2.0};
         vectorDouble = new VectorDouble(vector);
         double[] expResult = {10.0, 4.0, 2.0, 1.0};
-        VectorDouble tmp = vectorDouble.sortQuickDesc();
+        vectorDouble.sortQuickDesc();
         for (int i = 0; i < vectorDouble.getLength(); i++) {
-            assertEquals(expResult[i], tmp.get(i), 0.000000001);
+            assertEquals(expResult[i], vectorDouble.get(i), 0.000000001);
         }
     }
 
