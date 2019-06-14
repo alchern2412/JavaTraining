@@ -26620,3 +26620,13 @@
 2019-06-14 20:29:08,715 ERROR root:90 = vector can't be null
 2019-06-14 20:29:08,718  WARN root:201 = vector can't be null
 2019-06-14 20:29:08,723  WARN root:185 = vector can't be null
+2019-06-14 21:07:16,397  WARN root:117 = vector can't be null
+2019-06-14 21:07:16,428 ERROR root:103 = vector can't be null
+2019-06-14 21:07:16,428 ERROR root:58 = vector can't be null
+2019-06-14 21:07:16,491 ERROR root:74 = vector can't be null
+2019-06-14 21:07:16,506  WARN root:165 = vector can't be null
+2019-06-14 21:07:16,522  WARN root:143 = vector can't be null
+2019-06-14 21:07:16,569  WARN root:233 = vector can't be null
+2019-06-14 21:07:16,569 ERROR root:90 = vector can't be null
+2019-06-14 21:07:16,584  WARN root:201 = vector can't be null
+2019-06-14 21:07:16,600  WARN root:185 = vector can't be null
