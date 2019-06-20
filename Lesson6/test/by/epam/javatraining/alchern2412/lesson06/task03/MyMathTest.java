@@ -22,10 +22,11 @@ public class MyMathTest {
         assertEquals(expected, MyMath.factorial(number));
     }
 
-    @Test(expected = Exception.class)
+    @Test
     public void testFactorialNegativeNumber() throws Exception {
         int number = -5;
-        MyMath.factorial(number);
+        int expected = -1;
+        assertEquals(expected, MyMath.factorial(number));
     }
 
     @Test
@@ -34,13 +35,12 @@ public class MyMathTest {
         int expected = 1;
         assertEquals(expected, MyMath.factorial(number));
     }
-    
+
     @Test
     public void testFactorialOne() throws Exception {
         int number = 1;
         int expected = 1;
         assertEquals(expected, MyMath.factorial(number));
     }
-    
-    
+
 }

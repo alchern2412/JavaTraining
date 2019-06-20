@@ -6,14 +6,18 @@ package by.epam.javatraining.alchern2412.lesson06.task03;
  */
 public class MyMath {
 
-    public static int factorial(int number) throws Exception {
+    public static int factorial(int number) {
+        final int ERROR_CODE = -1;
+        final int START_NUM = 1;
+
         if (number < 0) {
-            throw new Exception("Number can't be negative");
+            return ERROR_CODE;
         }
-        int result = 1;
-        while (number >= 1) {
-            result *= number;
-            number--;
+
+        int result = START_NUM;
+
+        for (int i = 2; i <= number; i++) {
+            result *= i;
         }
         return result;
     }

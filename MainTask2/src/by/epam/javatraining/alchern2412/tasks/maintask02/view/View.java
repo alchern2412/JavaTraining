@@ -1,4 +1,4 @@
-package by.epam.javatraining.alchern2412.maintask01;
+package by.epam.javatraining.alchern2412.tasks.maintask02.view;
 
 import org.apache.log4j.Logger;
 

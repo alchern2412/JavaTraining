@@ -10,45 +10,26 @@ import static org.junit.Assert.*;
 public class NumberLogicTest {
 
     @Test
-    public void testIsPrimeNumberSM2() {
-        int number = 2;
-        boolean expResult = true;
-        boolean result = NumberLogic.isPrimeNumber(number);
-        assertEquals(expResult, result);
-    }
-
-    @Test
-    public void testIsPrimeNumberSM3() {
-        int number = 3;
-        boolean expResult = true;
-        boolean result = NumberLogic.isPrimeNumber(number);
-        assertEquals(expResult, result);
-    }
-    
-    @Test
-    public void testIsPrimeNumberSM5() {
-        int number = 5;
-        boolean expResult = true;
-        boolean result = NumberLogic.isPrimeNumber(number);
-        assertEquals(expResult, result);
-    }
-    
-    @Test
     public void testIsPrimeNumberTrue() {
-        int number = 197;
+        int[] numbers = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47,
+            53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
         boolean expResult = true;
-        boolean result = NumberLogic.isPrimeNumber(number);
-        assertEquals(expResult, result);
-    }    
+        for (int i = 0; i < numbers.length; i++) {
+            boolean result = NumberLogic.isPrimeNumber(numbers[i]);
+            assertEquals(expResult, result);
+        }
+    }
 
     @Test
     public void testIsPrimeNumberFalse() {
-        int number = 4;
+        int[] numbers = {4, 169, 121, 10, 25};
         boolean expResult = false;
-        boolean result = NumberLogic.isPrimeNumber(number);
-        assertEquals(expResult, result);
-    }    
-    
+        for (int i = 0; i < numbers.length; i++) {
+            boolean result = NumberLogic.isPrimeNumber(numbers[i]);
+            assertEquals(expResult, result);
+        }
+    }
+
     @Test
     public void testIsPrimeNumberZero() {
         int number = 0;
@@ -56,7 +37,7 @@ public class NumberLogicTest {
         boolean result = NumberLogic.isPrimeNumber(number);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testIsPrimeNumberOne() {
         int number = 1;
@@ -64,7 +45,7 @@ public class NumberLogicTest {
         boolean result = NumberLogic.isPrimeNumber(number);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testIsPrimeNumberNegativeNumber() {
         int number = -19;

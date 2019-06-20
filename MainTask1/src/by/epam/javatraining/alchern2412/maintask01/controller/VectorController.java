@@ -1,4 +1,8 @@
-package by.epam.javatraining.alchern2412.maintask01;
+package by.epam.javatraining.alchern2412.maintask01.controller;
+
+import by.epam.javatraining.alchern2412.maintask01.model.VectorDouble;
+import by.epam.javatraining.alchern2412.maintask01.model.VectorDoubleFunc;
+import by.epam.javatraining.alchern2412.maintask01.view.View;
 
 /**
  *
@@ -21,14 +25,14 @@ public class VectorController {
         vd.set(777, index);
         View.print(vd.get(index));
         
-        vd.sortInsertion();
+        VectorDoubleFunc.sortInsertion(vd);
         View.print(vd);
         
-        vd.sortMergeDesc();
+        VectorDoubleFunc.sortMergeDesc(vd);
         View.print(vd);
         
-        View.print(vd.findMax());
+        View.print(VectorDoubleFunc.findMax(vd));
         
-        View.print(vd.findLocalMin());
+        View.print(VectorDoubleFunc.findLocalMin(vd));
     }
 }
