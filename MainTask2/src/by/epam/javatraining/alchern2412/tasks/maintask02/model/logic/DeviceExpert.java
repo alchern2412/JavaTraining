@@ -27,9 +27,17 @@ public class DeviceExpert {
         return device == null;
     }
 
+    private static boolean isNullDevices(Housing housing) {
+        return housing.getElectrodevices() == null;
+    }
+
     public static int totalPowerAll(Housing housing) {
         if (isNullHousing(housing)) {
             LOG.warn("housing can't be null");
+            return ERROR_CODE;
+        }
+        if(isNullDevices(housing)) {
+            LOG.warn("housing.getElectrodevices is empty");
             return ERROR_CODE;
         }
         int result = 0;
@@ -42,6 +50,10 @@ public class DeviceExpert {
     public static int totalPowerOn(Housing housing) {
         if (isNullHousing(housing)) {
             LOG.warn("housing can't be null");
+            return ERROR_CODE;
+        }
+        if(isNullDevices(housing)) {
+            LOG.warn("housing.getElectrodevices is empty");
             return ERROR_CODE;
         }
         int result = 0;
@@ -58,8 +70,11 @@ public class DeviceExpert {
             LOG.warn("housing can't be null");
             return;
         }
-        //.....
-        Arrays.sort(housing.getElectrodevices());
+        if(isNullDevices(housing)) {
+            LOG.warn("housing.getElectrodevices is empty");
+            return;
+        }
+        Arrays.sort(housing.getElectrodevices(), Electrodevice.COMPARE_BY_POWER);
     }
 
     public static void sortByPrice(Housing housing) {
@@ -67,7 +82,11 @@ public class DeviceExpert {
             LOG.warn("housing can't be null");
             return;
         }
-        //.....
+        if(isNullDevices(housing)) {
+            LOG.warn("housing.getElectrodevices is empty");
+            return;
+        }
+        Arrays.sort(housing.getElectrodevices(), Electrodevice.COMPARE_BY_PRICE);
     }
 
     public static void addElectrodevice(Housing housing, Electrodevice device) {
@@ -79,9 +98,9 @@ public class DeviceExpert {
             LOG.warn("electrodevice can't be null");
             return;
         }
-        
+
         Electrodevice[] newDevices;
-        if (housing.getElectrodevices() != null) {
+        if (!isNullDevices(housing)) {
             final int LENGTH = housing.getElectrodevices().length;
             Electrodevice[] oldDevices = housing.getElectrodevices();
             newDevices = new Electrodevice[LENGTH + 1];
@@ -105,15 +124,19 @@ public class DeviceExpert {
             LOG.warn("electrodevice can't be null");
             return false;
         }
-        
+        if(isNullDevices(housing)) {
+            LOG.warn("housing.getElectrodevices is empty");
+            return false;
+        }
+
         // logic
         boolean result = false;
         int index = Arrays.binarySearch(housing.getElectrodevices(), device);
-        if(index >= 0) {
+        if (index >= 0) {
             final int OLD_LENGTH = housing.getElectrodevices().length;
             Electrodevice[] newDevices = new Electrodevice[OLD_LENGTH - 1];
-            for(int i = 0, j = 0; i < OLD_LENGTH; i++) {
-                if(j != index) {
+            for (int i = 0, j = 0; i < OLD_LENGTH; i++) {
+                if (j != index) {
                     newDevices[j] = housing.getElectrodevices()[i];
                     j++;
                 }
@@ -121,7 +144,103 @@ public class DeviceExpert {
             housing.setElectrodevices(newDevices);
             result = true;
         }
-        
+
         return result;
+    }
+
+    public static Electrodevice maxPriceElectrodevice(Housing housing) {
+        if (isNullHousing(housing)) {
+            LOG.warn("housing can't be null");
+            return null;
+        }
+        if(isNullDevices(housing)) {
+            LOG.warn("housing.getElectrodevices is empty");
+            return null;
+        }
+        Electrodevice max = null;
+        if (!isNullDevices(housing)) {
+            Electrodevice[] devices = housing.getElectrodevices();
+            max = devices[0];
+            for (Electrodevice device : devices) {
+                if (max.getPrice() < device.getPrice()) {
+                    max = device;
+                }
+            }
+        } else {
+            LOG.warn("housing.getElectrodevices() = null");
+        }
+        return max;
+    }
+
+    public static Electrodevice minPriceElectrodevice(Housing housing) {
+        if (isNullHousing(housing)) {
+            LOG.warn("housing can't be null");
+            return null;
+        }
+        if(isNullDevices(housing)) {
+            LOG.warn("housing.getElectrodevices is empty");
+            return null;
+        }
+        Electrodevice min = null;
+        if (!isNullDevices(housing)) {
+            Electrodevice[] devices = housing.getElectrodevices();
+            min = devices[0];
+            for (Electrodevice device : devices) {
+                if (min.getPrice() > device.getPrice()) {
+                    min = device;
+                }
+            }
+        } else {
+            LOG.warn("housing.getElectrodevices() = null");
+        }
+        return min;
+    }
+    
+    public static Electrodevice maxPowerElectrodevice(Housing housing) {
+        if (isNullHousing(housing)) {
+            LOG.warn("housing can't be null");
+            return null;
+        }
+        if(isNullDevices(housing)) {
+            LOG.warn("housing.getElectrodevices is empty");
+            return null;
+        }
+        Electrodevice max = null;
+        if (!isNullDevices(housing)) {
+            Electrodevice[] devices = housing.getElectrodevices();
+            max = devices[0];
+            for (Electrodevice device : devices) {
+                if (max.getPower() < device.getPower()) {
+                    max = device;
+                }
+            }
+        } else {
+            LOG.warn("housing.getElectrodevices() = null");
+        }
+        return max;
+    }
+
+    public static Electrodevice minPowerElectrodevice(Housing housing) {
+        if (isNullHousing(housing)) {
+            LOG.warn("housing can't be null");
+            return null;
+        }
+        if(isNullDevices(housing)) {
+            LOG.warn("housing.getElectrodevices is empty");
+            return null;
+        }
+        Electrodevice min = null;
+        if (!isNullDevices(housing)) {
+            Electrodevice[] devices = housing.getElectrodevices();
+            min = devices[0];
+            for (Electrodevice device : devices) {
+                if (min.getPower() > device.getPower()) {
+                    min = device;
+                }
+            }
+        } else {
+            LOG.warn("housing.getElectrodevices() = null");
+        }
+        return min;
     }
 }

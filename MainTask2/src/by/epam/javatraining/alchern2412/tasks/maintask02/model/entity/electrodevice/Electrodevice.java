@@ -5,11 +5,13 @@
  */
 package by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrodevice;
 
+import java.util.Comparator;
+
 /**
  *
  * @author Alex
  */
-public abstract class Electrodevice {
+public abstract class Electrodevice implements Comparable<Electrodevice> {
     /*fields*/
 
     private boolean run = false;
@@ -87,6 +89,33 @@ public abstract class Electrodevice {
         return "Electrodevice [Power=" + power
                 + ", Price=" + price
                 + ", Run=" + run + "]";
+    }
+
+    public static final Comparator<Electrodevice> COMPARE_BY_POWER
+            = (Electrodevice o1, Electrodevice o2) -> {
+                if (o1.getPower() == o2.getPower()) {
+                    return 0;
+                } else if (o1.getPower() > o2.getPower()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            };
+
+    public static final Comparator<Electrodevice> COMPARE_BY_PRICE
+            = (Electrodevice o1, Electrodevice o2) -> {
+                if (o1.getPrice() == o2.getPrice()) {
+                    return 0;
+                } else if (o1.getPrice() > o2.getPrice()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            };
+
+    @Override
+    public int compareTo(Electrodevice o) {
+        return toString().compareTo(o.toString());
     }
 
 }

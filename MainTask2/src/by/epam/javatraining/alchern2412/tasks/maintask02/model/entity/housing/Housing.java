@@ -13,12 +13,24 @@ import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrodev
  */
 public abstract class Housing {
 
+    /*fields*/
+    
     private String address;
 
     public String getAddress() {
         return address;
     }
 
+    private int roomCount;
+
+    public void setRoomCount(int roomCount) {
+        this.roomCount = roomCount;
+    }
+
+    public int getRoomCount() {
+        return roomCount;
+    }
+        
     private Electrodevice[] electrodevices;
 
     public Electrodevice[] getElectrodevices() {
@@ -29,17 +41,21 @@ public abstract class Housing {
         this.electrodevices = electrodevices;
     }
 
+    
+    /*Constructors*/
+    
     public Housing() {
-        this("Unknown Address");
+        this(1, "Unknown Address");
     }
 
-    public Housing(String address) {
-        this(address, null);
+    public Housing(int roomCount, String address) {
+        this(roomCount, address, null);
     }
 
-    public Housing(String address, Electrodevice[] electrodevices) {
+    public Housing(int roomCount, String address, Electrodevice[] electrodevices) {
         this.address = address;
         this.electrodevices = electrodevices;
+        this.roomCount = roomCount;
     }
 
 }
