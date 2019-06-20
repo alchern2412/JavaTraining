@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package by.epam.javatraining.alchern2412.tasks.maintask02.model.logic;
 
 import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrodevice.Electrodevice;
@@ -15,21 +10,37 @@ import java.util.Arrays;
 import org.apache.log4j.Logger;
 
 /**
- *
+ * Used to work with an array of Electrodevices class Housing.
+ * 
  * @author Alex
  */
 public class DeviceExpert {
-
+    /** The initial value of the power if the class 
+     * does not have a Housing Eletrodevice.
+     */
     private static final int EMPTY_HOUSING = 0;
+    
+    /**
+     * Logger for DeviceExpert Class
+     */
     private static final Logger LOG = Logger.getRootLogger();
 
+    /**
+     * The method checks Housing for null value. 
+     * In which case throws Exception.
+     */
     private static void isNullHousing(Housing housing) throws NullException {
         if (housing == null) {
             LOG.warn("Housing can't be null");
             throw new NullHousingException("Null Housing");
         }
     }
-
+    
+    /**
+     * The method checks Electrodevice for null value. 
+     * In which case throws Exception.
+     * @param device device are checked
+     */
     private static void isNullDevice(Electrodevice device) throws NullException {
         if (device == null) {
             LOG.warn("Device can't be null");
@@ -37,6 +48,12 @@ public class DeviceExpert {
         }
     }
 
+    /**
+     * The method checks Electrodevices of Housing for null value. 
+     * In which case returns true or false
+     * 
+     * @param housing Housing, devices which are checked
+     */
     private static boolean isNullDevices(Housing housing) {
         if (housing.getElectrodevices() == null) {
             LOG.warn("Device can't be null");
@@ -45,6 +62,11 @@ public class DeviceExpert {
         return false;
     }
 
+    /**
+     * the method returns the total power of all Housing electrodevices. 
+     * 
+     * @param housing Housing, devices power which are checked
+     */
     public static int totalPowerAll(Housing housing) throws NullException {
         isNullHousing(housing);
         if (isNullDevices(housing)) {
@@ -57,6 +79,11 @@ public class DeviceExpert {
         return result;
     }
 
+    /**
+     * the method returns the total power of Housing electrodevices which ON.  
+     * 
+     * @param housing Housing, devices power which are checked
+     */
     public static int totalPowerOn(Housing housing) throws NullException {
         isNullHousing(housing);
         if (isNullDevices(housing)) {
@@ -71,6 +98,11 @@ public class DeviceExpert {
         return result;
     }
 
+    /**
+     * This method sort Electrodevices of Housing by Power. 
+     * 
+     * @param housing Housing, devices power which are checked
+     */
     public static void sortByPower(Housing housing) throws NullException {
         isNullHousing(housing);
         if (isNullDevices(housing)) {
@@ -79,6 +111,11 @@ public class DeviceExpert {
         Arrays.sort(housing.getElectrodevices(), Electrodevice.COMPARE_BY_POWER);
     }
 
+    /**
+     * This method sort Electrodevices of Housing by Price. 
+     * 
+     * @param housing Housing, devices power which are checked
+     */
     public static void sortByPrice(Housing housing) throws NullException {
         isNullHousing(housing);
         if (isNullDevices(housing)) {
@@ -87,6 +124,13 @@ public class DeviceExpert {
         Arrays.sort(housing.getElectrodevices(), Electrodevice.COMPARE_BY_PRICE);
     }
 
+    /**
+     * This method add Electrodevice to Housing.
+     * If housing is null, new Electrodevices array will be created.
+     * 
+     * @param housing Housing, devices power which are checked
+     * @param device Device, which will be added
+     */
     public static void addElectrodevice(Housing housing, Electrodevice device) throws NullException {
         isNullHousing(housing);
         isNullDevice(device);
@@ -111,6 +155,13 @@ public class DeviceExpert {
         housing.setElectrodevices(newDevices);
     }
 
+    /**
+     * This method remove Electrodevice from Housing.
+     * If device is not founded, return false.
+     * 
+     * @param housing Housing, devices power which are checked
+     * @param device Device, which will be removed
+     */
     public static boolean removeElectrodevice(Housing housing, Electrodevice device) throws NullException {
         // check parms eq. null
         isNullHousing(housing);
@@ -138,6 +189,12 @@ public class DeviceExpert {
         return result;
     }
 
+    /**
+     * This method returns the electrodevice with the maximum price.
+     * 
+     * @param housing Housing, devices power which are checked
+     * @return electrodevice with the maximum price
+     */
     public static Electrodevice maxPriceElectrodevice(Housing housing) throws NullException {
         isNullHousing(housing);
         if (isNullDevices(housing)) {
@@ -158,6 +215,12 @@ public class DeviceExpert {
         return max;
     }
 
+    /**
+     * This method returns the electrodevice with the minimum price.
+     * 
+     * @param housing Housing, devices power which are checked
+     * @return electrodevice with the minimum price
+     */
     public static Electrodevice minPriceElectrodevice(Housing housing) throws NullException {
         isNullHousing(housing);
         if (isNullDevices(housing)) {
@@ -178,6 +241,12 @@ public class DeviceExpert {
         return min;
     }
 
+    /**
+     * This method returns the electrodevice with the maximum power.
+     * 
+     * @param housing Housing, devices power which are checked
+     * @return electrodevice with the maximum power
+     */
     public static Electrodevice maxPowerElectrodevice(Housing housing) throws NullException {
         isNullHousing(housing);
         if (isNullDevices(housing)) {
@@ -198,6 +267,12 @@ public class DeviceExpert {
         return max;
     }
 
+    /**
+     * This method returns the electrodevice with the minimum power.
+     * 
+     * @param housing Housing, devices power which are checked
+     * @return electrodevice with the minimum power
+     */
     public static Electrodevice minPowerElectrodevice(Housing housing) throws NullException {
         isNullHousing(housing);
         if (isNullDevices(housing)) {

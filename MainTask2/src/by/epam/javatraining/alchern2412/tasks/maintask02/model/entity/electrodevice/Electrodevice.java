@@ -8,43 +8,106 @@ package by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrode
 import java.util.Comparator;
 
 /**
+ * This class is an abstraction for creating real Electrodevices (ex: Washing
+ * Machine, Coffee Grinder etc.).
  *
  * @author Alex
  */
 public abstract class Electrodevice implements Comparable<Electrodevice> {
     /*fields*/
 
+    /**
+     * The field indicates whether the device is On or Off
+     */
     private boolean run = false;
 
+    /**
+     * Check device On or Off
+     *
+     * @return if device is On - true; else false
+     */
     public boolean isRun() {
         return run;
     }
 
+    /**
+     * Used for On or Off electrodevice
+     *
+     * @param run if true - device On, else - off.
+     */
     public void setRun(boolean run) {
         this.run = run;
     }
 
+    /**
+     * Power of Electrodevice
+     */
     private int power;
 
+    /**
+     * Power getter
+     *
+     * @return
+     */
     public int getPower() {
         return power;
     }
 
+    /**
+     * Power setter.
+     * Power can't be lower zero. Default 0.
+     * 
+     * @param power 
+     */
     public void setPower(int power) {
-        this.power = power;
+        if (power >= 0) {
+            this.power = power;
+        } else {
+            this.power = 0;
+        }
     }
 
+    /**
+     * Price of Electrodevice
+     */
     private int price;
 
+    /**
+     * Price getter
+     * 
+     * @return Price of Electrodevice 
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * Price setter
+     * 
+     * @param price Price of Electrodevice 
+     */
     public void setPrice(int price) {
         this.price = price;
     }
 
     /*Constructors*/
+    
+    /**
+     * Default constructor
+     * Price and Power is 0 by default
+     * isRun = false.
+     */
+    public Electrodevice() {
+        this(0, 0);
+    }
+    
+    /**
+     * Mid Constructor.
+     * isRun = false by default.
+     * 
+     * @param power Power of Electrodevice
+     * @param price Price of Electrodevice
+     */
     public Electrodevice(int power, int price) {
         this.power = power;
         this.price = price;
@@ -56,6 +119,12 @@ public abstract class Electrodevice implements Comparable<Electrodevice> {
         this.run = run;
     }
 
+    /**
+     * Overrided method for equality objects Electrodevice.
+     * 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -91,6 +160,9 @@ public abstract class Electrodevice implements Comparable<Electrodevice> {
                 + ", Run=" + run + "]";
     }
 
+    /**
+     * Comparator by power for sorting by power
+     */
     public static final Comparator<Electrodevice> COMPARE_BY_POWER
             = (Electrodevice o1, Electrodevice o2) -> {
                 if (o1.getPower() == o2.getPower()) {
@@ -102,6 +174,9 @@ public abstract class Electrodevice implements Comparable<Electrodevice> {
                 }
             };
 
+    /**
+     * Comparator by price for sorting by price
+     */
     public static final Comparator<Electrodevice> COMPARE_BY_PRICE
             = (Electrodevice o1, Electrodevice o2) -> {
                 if (o1.getPrice() == o2.getPrice()) {
@@ -113,6 +188,12 @@ public abstract class Electrodevice implements Comparable<Electrodevice> {
                 }
             };
 
+    /**
+     * For Arrays.findBinary(...)
+     * 
+     * @param o
+     * @return 
+     */
     @Override
     public int compareTo(Electrodevice o) {
         return toString().compareTo(o.toString());

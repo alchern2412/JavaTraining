@@ -7,7 +7,8 @@
 package by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrodevice;
 
 /**
- *
+ * Used 
+ * 
  * @author Alex
  */
 public class VacuumCleaner extends Electrodevice {
