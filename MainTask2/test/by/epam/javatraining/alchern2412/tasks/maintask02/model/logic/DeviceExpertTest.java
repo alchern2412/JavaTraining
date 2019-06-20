@@ -10,6 +10,7 @@ import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrodev
 import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrodevice.VacuumCleaner;
 import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrodevice.WashingMachine;
 import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.housing.Flat;
+import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.housing.House;
 import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.housing.Housing;
 import by.epam.javatraining.alchern2412.tasks.maintask02.model.exceptions.NullException;
 import org.apache.log4j.Logger;
@@ -34,17 +35,17 @@ public class DeviceExpertTest {
     Electrodevice washingMachine2 = new WashingMachine(50, 1900, 978);
     Electrodevice washingMachine3 = new WashingMachine(70, 3000, 5500);
 
-    Electrodevice vacoomCleaner1 = new VacuumCleaner(15, 2500, 307);
-    Electrodevice vacoomCleaner2 = new VacuumCleaner(30, 5000, 1400);
-    Electrodevice vacoomCleaner3 = new VacuumCleaner(17, 1432, 509);
+    Electrodevice vacuumCleaner1 = new VacuumCleaner(15, 2500, 307);
+    Electrodevice vacuumCleaner2 = new VacuumCleaner(30, 5000, 1400);
+    Electrodevice vacuumCleaner3 = new VacuumCleaner(17, 1432, 509);
 
     @Before
     public void beforeTests() {
 
         washingMachine1.setRun(true);
-        vacoomCleaner2.setRun(true);
+        vacuumCleaner2.setRun(true);
 
-        Electrodevice[] devices = new Electrodevice[]{coffeeGrinder1, coffeeGrinder2, washingMachine1, washingMachine2, washingMachine3, vacoomCleaner1, vacoomCleaner2, vacoomCleaner3};
+        Electrodevice[] devices = new Electrodevice[]{coffeeGrinder1, coffeeGrinder2, washingMachine1, washingMachine2, washingMachine3, vacuumCleaner1, vacuumCleaner2, vacuumCleaner3};
         housing = new Flat(1, 40, 2, "Minsk, Bobrujskaya 25, kv 314", devices);
 
     }
@@ -99,8 +100,8 @@ public class DeviceExpertTest {
     public void testSortByPower() throws NullException {
         LOG.info("sortByPower");
         Electrodevice[] sortedDevices = new Electrodevice[]{
-            coffeeGrinder2, coffeeGrinder1, vacoomCleaner3, washingMachine1, washingMachine2, vacoomCleaner1, washingMachine3,
-            vacoomCleaner2};
+            coffeeGrinder2, coffeeGrinder1, vacuumCleaner3, washingMachine1, washingMachine2, vacuumCleaner1, washingMachine3,
+            vacuumCleaner2};
 
         DeviceExpert.sortByPower(housing);
         assertArrayEquals(sortedDevices, housing.getElectrodevices());
@@ -124,9 +125,9 @@ public class DeviceExpertTest {
         LOG.info("sortByPrice");
 
         Electrodevice[] sortedDevices = new Electrodevice[]{
-            coffeeGrinder2, coffeeGrinder1, vacoomCleaner1,
-            washingMachine1, vacoomCleaner3, washingMachine2,
-            vacoomCleaner2, washingMachine3};
+            coffeeGrinder2, coffeeGrinder1, vacuumCleaner1,
+            washingMachine1, vacuumCleaner3, washingMachine2,
+            vacuumCleaner2, washingMachine3};
 
         DeviceExpert.sortByPrice(housing);
         assertArrayEquals(sortedDevices, housing.getElectrodevices());
@@ -157,7 +158,7 @@ public class DeviceExpertTest {
         int expected = 1;
         assertEquals(expected, housing1.getElectrodevices().length);
     }
-    
+
     @Test(expected = NullException.class)
     public void testAddElectrodeviceNull() throws NullException {
         LOG.info("addElectrodevice");
@@ -167,7 +168,7 @@ public class DeviceExpertTest {
         Electrodevice device = new CoffeeGrinder(4, 500, 99);
         DeviceExpert.addElectrodevice(housing1, device);
     }
-    
+
     @Test
     public void testAddElectrodeviceExistDevice() throws NullException {
         LOG.info("addElectrodevice");
@@ -193,7 +194,7 @@ public class DeviceExpertTest {
         boolean expected = true;
         assertEquals(expected, result);
     }
-    
+
     @Test(expected = NullException.class)
     public void testRemoveElectrodeviceNull() throws NullException {
         LOG.info("removeElectrodevice");
@@ -202,7 +203,7 @@ public class DeviceExpertTest {
         boolean expected = false;
         assertEquals(result, expected);
     }
-    
+
     @Test(expected = NullException.class)
     public void testRemoveElectrodeviceRemoveNull() throws NullException {
         LOG.info("removeElectrodevice");
@@ -219,7 +220,7 @@ public class DeviceExpertTest {
         Electrodevice result = DeviceExpert.maxPriceElectrodevice(housing);
         assertEquals(expResult, result);
     }
-    
+
     @Test(expected = NullException.class)
     public void testMaxPriceElectrodeviceNull() throws NullException {
         LOG.info("maxPriceElectrodevice");
@@ -246,12 +247,12 @@ public class DeviceExpertTest {
         Electrodevice result = DeviceExpert.minPriceElectrodevice(null);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testMaxPowerElectrodevice() throws NullException {
         LOG.info("maxPowerElectrodevice");
 
-        Electrodevice expResult = vacoomCleaner2;
+        Electrodevice expResult = vacuumCleaner2;
         Electrodevice result = DeviceExpert.maxPowerElectrodevice(housing);
         assertEquals(expResult, result);
     }
@@ -264,7 +265,7 @@ public class DeviceExpertTest {
         Electrodevice result = DeviceExpert.maxPowerElectrodevice(null);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testMinPowerElectrodevice() throws NullException {
         LOG.info("minPowerElectrodevice");
@@ -281,5 +282,33 @@ public class DeviceExpertTest {
         Electrodevice expResult = null;
         Electrodevice result = DeviceExpert.minPowerElectrodevice(null);
         assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testFindElectrodevices() throws NullException {
+        Electrodevice[] result = DeviceExpert.findElectrodevices(housing, 1000, 2000, 700, 3000);
+        Electrodevice[] expected = new Electrodevice[]{washingMachine2};
+        assertArrayEquals(expected, result);
+    }
+    
+    @Test(expected = NullException.class)
+    public void testFindElectrodevicesNull() throws NullException {
+        Housing h = null;
+        DeviceExpert.findElectrodevices(h, 1000, 2000, 700, 3000);
+    }
+    
+    @Test
+    public void testFindElectrodevicesNullDevices() throws NullException {
+        Housing h = new House(null, null, 20, 1, 1, null);
+        Electrodevice[] result = DeviceExpert.findElectrodevices(h, 1000, 2000, 700, 3000);
+        Electrodevice[] expected = null;
+        assertArrayEquals(expected, result);
+    }
+    
+    @Test
+    public void testFindElectrodevicesNotFound() throws NullException {
+        Electrodevice[] result = DeviceExpert.findElectrodevices(housing, 5000, 70000, 7000, 70000);
+        Electrodevice[] expected = new Electrodevice[0];
+        assertArrayEquals(expected, result);
     }
 }

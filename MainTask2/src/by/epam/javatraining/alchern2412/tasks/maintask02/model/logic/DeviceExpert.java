@@ -11,23 +11,24 @@ import org.apache.log4j.Logger;
 
 /**
  * Used to work with an array of Electrodevices class Housing.
- * 
+ *
  * @author Alex
  */
 public class DeviceExpert {
-    /** The initial value of the power if the class 
-     * does not have a Housing Eletrodevice.
+
+    /**
+     * The initial value of the power if the class does not have a Housing
+     * Eletrodevice.
      */
     private static final int EMPTY_HOUSING = 0;
-    
+
     /**
      * Logger for DeviceExpert Class
      */
     private static final Logger LOG = Logger.getRootLogger();
 
     /**
-     * The method checks Housing for null value. 
-     * In which case throws Exception.
+     * The method checks Housing for null value. In which case throws Exception.
      */
     private static void isNullHousing(Housing housing) throws NullException {
         if (housing == null) {
@@ -35,10 +36,11 @@ public class DeviceExpert {
             throw new NullHousingException("Null Housing");
         }
     }
-    
+
     /**
-     * The method checks Electrodevice for null value. 
-     * In which case throws Exception.
+     * The method checks Electrodevice for null value. In which case throws
+     * Exception.
+     *
      * @param device device are checked
      */
     private static void isNullDevice(Electrodevice device) throws NullException {
@@ -49,9 +51,9 @@ public class DeviceExpert {
     }
 
     /**
-     * The method checks Electrodevices of Housing for null value. 
-     * In which case returns true or false
-     * 
+     * The method checks Electrodevices of Housing for null value. In which case
+     * returns true or false
+     *
      * @param housing Housing, devices which are checked
      */
     private static boolean isNullDevices(Housing housing) {
@@ -63,8 +65,8 @@ public class DeviceExpert {
     }
 
     /**
-     * the method returns the total power of all Housing electrodevices. 
-     * 
+     * the method returns the total power of all Housing electrodevices.
+     *
      * @param housing Housing, devices power which are checked
      */
     public static int totalPowerAll(Housing housing) throws NullException {
@@ -80,8 +82,8 @@ public class DeviceExpert {
     }
 
     /**
-     * the method returns the total power of Housing electrodevices which ON.  
-     * 
+     * the method returns the total power of Housing electrodevices which ON.
+     *
      * @param housing Housing, devices power which are checked
      */
     public static int totalPowerOn(Housing housing) throws NullException {
@@ -99,8 +101,8 @@ public class DeviceExpert {
     }
 
     /**
-     * This method sort Electrodevices of Housing by Power. 
-     * 
+     * This method sort Electrodevices of Housing by Power.
+     *
      * @param housing Housing, devices power which are checked
      */
     public static void sortByPower(Housing housing) throws NullException {
@@ -112,8 +114,8 @@ public class DeviceExpert {
     }
 
     /**
-     * This method sort Electrodevices of Housing by Price. 
-     * 
+     * This method sort Electrodevices of Housing by Price.
+     *
      * @param housing Housing, devices power which are checked
      */
     public static void sortByPrice(Housing housing) throws NullException {
@@ -125,9 +127,9 @@ public class DeviceExpert {
     }
 
     /**
-     * This method add Electrodevice to Housing.
-     * If housing is null, new Electrodevices array will be created.
-     * 
+     * This method add Electrodevice to Housing. If housing is null, new
+     * Electrodevices array will be created.
+     *
      * @param housing Housing, devices power which are checked
      * @param device Device, which will be added
      */
@@ -156,9 +158,9 @@ public class DeviceExpert {
     }
 
     /**
-     * This method remove Electrodevice from Housing.
-     * If device is not founded, return false.
-     * 
+     * This method remove Electrodevice from Housing. If device is not founded,
+     * return false.
+     *
      * @param housing Housing, devices power which are checked
      * @param device Device, which will be removed
      */
@@ -191,7 +193,7 @@ public class DeviceExpert {
 
     /**
      * This method returns the electrodevice with the maximum price.
-     * 
+     *
      * @param housing Housing, devices power which are checked
      * @return electrodevice with the maximum price
      */
@@ -217,7 +219,7 @@ public class DeviceExpert {
 
     /**
      * This method returns the electrodevice with the minimum price.
-     * 
+     *
      * @param housing Housing, devices power which are checked
      * @return electrodevice with the minimum price
      */
@@ -243,7 +245,7 @@ public class DeviceExpert {
 
     /**
      * This method returns the electrodevice with the maximum power.
-     * 
+     *
      * @param housing Housing, devices power which are checked
      * @return electrodevice with the maximum power
      */
@@ -269,7 +271,7 @@ public class DeviceExpert {
 
     /**
      * This method returns the electrodevice with the minimum power.
-     * 
+     *
      * @param housing Housing, devices power which are checked
      * @return electrodevice with the minimum power
      */
@@ -291,5 +293,44 @@ public class DeviceExpert {
             LOG.warn("housing.getElectrodevices() = null");
         }
         return min;
+    }
+
+    /**
+     * This method return Electrodevice[] by parameters
+     *
+     * @param housing Housing
+     * @param fromPrice Start price
+     * @param toPrice Finish price
+     * @param fromPower Start Power
+     * @param toPower Finish Power
+     * @return Electrodevice array
+     * @throws NullException
+     */
+    public static Electrodevice[] findElectrodevices(Housing housing, int fromPower,
+            int toPower, int fromPrice, int toPrice) throws NullException {
+        isNullHousing(housing);
+        if (isNullDevices(housing)) {
+            return null;
+        }
+        Electrodevice[] tmp = new Electrodevice[housing.getElectrodevices().length];
+        int i = 0;
+        for (Electrodevice device : housing.getElectrodevices()) {
+            if (device.getPower() >= fromPower && device.getPower() <= toPower
+                    && device.getPrice() >= fromPrice
+                    && device.getPrice() <= toPrice) {
+                tmp[i] = device;
+                i++;
+            }
+        }
+        Electrodevice[] result;
+        if (i == housing.getElectrodevices().length) {
+            result = tmp;
+        } else {
+            result = new Electrodevice[i];
+            for (int j = 0; j < result.length; j++) {
+                result[j] = tmp[j];
+            }
+        }
+        return result;
     }
 }

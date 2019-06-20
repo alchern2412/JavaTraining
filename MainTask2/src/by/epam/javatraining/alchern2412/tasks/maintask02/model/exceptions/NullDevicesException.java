@@ -7,7 +7,8 @@
 package by.epam.javatraining.alchern2412.tasks.maintask02.model.exceptions;
 
 /**
- *
+ * Class to throw Exception when errors occur.
+ * 
  * @author Alex
  */
 public class NullDevicesException extends NullException {
