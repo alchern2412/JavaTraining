@@ -11,6 +11,7 @@ import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrodev
 import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.electrodevice.WashingMachine;
 import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.housing.Flat;
 import by.epam.javatraining.alchern2412.tasks.maintask02.model.entity.housing.Housing;
+import by.epam.javatraining.alchern2412.tasks.maintask02.model.exceptions.NullException;
 import org.apache.log4j.Logger;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -49,23 +50,53 @@ public class DeviceExpertTest {
     }
 
     @Test
-    public void testTotalPowerAll() {
+    public void testTotalPowerAll() throws NullException {
         LOG.info("totalPowerAll");
         int expResult = 16832;
         int result = DeviceExpert.totalPowerAll(housing);
         assertEquals(expResult, result);
     }
 
+    @Test(expected = NullException.class)
+    public void testTotalPowerAllNull() throws NullException {
+        LOG.info("totalPowerAll");
+        DeviceExpert.totalPowerAll(null);
+    }
+
     @Test
-    public void testTotalPowerOn() {
+    public void testTotalPowerAllNullDevices() throws NullException {
+        LOG.info("totalPowerAll");
+        int expResult = 0;
+        Housing h = new Flat();
+        int result = DeviceExpert.totalPowerAll(h);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testTotalPowerOn() throws NullException {
         LOG.info("totalPowerOn");
         int expResult = 6500;
         int result = DeviceExpert.totalPowerOn(housing);
         assertEquals(expResult, result);
     }
 
+    @Test(expected = NullException.class)
+    public void testTotalPowerOnNull() throws NullException {
+        LOG.info("totalPowerOn");
+        DeviceExpert.totalPowerOn(null);
+    }
+
     @Test
-    public void testSortByPower() {
+    public void testTotalPowerOnNullDevices() throws NullException {
+        LOG.info("totalPowerOn");
+        int expResult = 0;
+        Housing h = new Flat();
+        int result = DeviceExpert.totalPowerOn(h);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testSortByPower() throws NullException {
         LOG.info("sortByPower");
         Electrodevice[] sortedDevices = new Electrodevice[]{
             coffeeGrinder2, coffeeGrinder1, vacoomCleaner3, washingMachine1, washingMachine2, vacoomCleaner1, washingMachine3,
@@ -75,8 +106,21 @@ public class DeviceExpertTest {
         assertArrayEquals(sortedDevices, housing.getElectrodevices());
     }
 
+    @Test(expected = NullException.class)
+    public void testSortByPowerNull() throws NullException {
+        LOG.info("sortByPower");
+        DeviceExpert.sortByPower(null);
+    }
+
     @Test
-    public void testSortByPrice() {
+    public void testSortByPowerNullDevices() throws NullException {
+        LOG.info("sortByPower");
+        Housing h = new Flat();
+        DeviceExpert.sortByPower(h);
+    }
+
+    @Test
+    public void testSortByPrice() throws NullException {
         LOG.info("sortByPrice");
 
         Electrodevice[] sortedDevices = new Electrodevice[]{
@@ -88,8 +132,22 @@ public class DeviceExpertTest {
         assertArrayEquals(sortedDevices, housing.getElectrodevices());
     }
 
+    @Test(expected = NullException.class)
+    public void testSortByPriceNull() throws NullException {
+        LOG.info("sortByPrice");
+        DeviceExpert.sortByPrice(null);
+    }
+
     @Test
-    public void testAddElectrodevice() {
+    public void testSortByPriceNullDevices() throws NullException {
+        LOG.info("sortByPower");
+        Housing h = new Flat();
+
+        DeviceExpert.sortByPrice(h);
+    }
+
+    @Test
+    public void testAddElectrodevice() throws NullException {
         LOG.info("addElectrodevice");
 
         Housing housing1 = new Flat(1, 40, 2, "Minsk, Bobrujskaya 25, kv 314");
@@ -98,32 +156,81 @@ public class DeviceExpertTest {
         DeviceExpert.addElectrodevice(housing1, device);
         int expected = 1;
         assertEquals(expected, housing1.getElectrodevices().length);
+    }
+    
+    @Test(expected = NullException.class)
+    public void testAddElectrodeviceNull() throws NullException {
+        LOG.info("addElectrodevice");
 
+        Housing housing1 = null;
+
+        Electrodevice device = new CoffeeGrinder(4, 500, 99);
+        DeviceExpert.addElectrodevice(housing1, device);
+    }
+    
+    @Test
+    public void testAddElectrodeviceExistDevice() throws NullException {
+        LOG.info("addElectrodevice");
+
+        Housing housing1 = new Flat(1, 40, 2, "Minsk, Bobrujskaya 25, kv 314");
+
+        Electrodevice device = new CoffeeGrinder(4, 500, 99);
+        DeviceExpert.addElectrodevice(housing1, device);
+        DeviceExpert.addElectrodevice(housing1, device);
+        DeviceExpert.addElectrodevice(housing1, device);
+        int expected = 1;
+        assertEquals(expected, housing1.getElectrodevices().length);
     }
 
     @Test
-    public void testRemoveElectrodevice() {
+    public void testRemoveElectrodevice() throws NullException {
         LOG.info("removeElectrodevice");
         Electrodevice device = new CoffeeGrinder(4, 500, 99);
         Electrodevice[] devices = new Electrodevice[]{device};
         Housing housing1 = new Flat(1, 40, 2, "Minsk, Bobrujskaya 25, kv 314", devices);
 
-        DeviceExpert.removeElectrodevice(housing1, device);
-        int expected = 0;
-        assertEquals(expected, housing1.getElectrodevices().length);
+        boolean result = DeviceExpert.removeElectrodevice(housing1, device);
+        boolean expected = true;
+        assertEquals(expected, result);
+    }
+    
+    @Test(expected = NullException.class)
+    public void testRemoveElectrodeviceNull() throws NullException {
+        LOG.info("removeElectrodevice");
+        Electrodevice device = new CoffeeGrinder(4, 500, 99);
+        boolean result = DeviceExpert.removeElectrodevice(null, device);
+        boolean expected = false;
+        assertEquals(result, expected);
+    }
+    
+    @Test(expected = NullException.class)
+    public void testRemoveElectrodeviceRemoveNull() throws NullException {
+        LOG.info("removeElectrodevice");
+        Housing housing1 = new Flat(1, 40, 2, "Minsk, Bobrujskaya 25, kv 314", null);
+
+        DeviceExpert.removeElectrodevice(housing1, null);
     }
 
     @Test
-    public void testMaxPriceElectrodevice() {
+    public void testMaxPriceElectrodevice() throws NullException {
         LOG.info("maxPriceElectrodevice");
 
         Electrodevice expResult = washingMachine3;
         Electrodevice result = DeviceExpert.maxPriceElectrodevice(housing);
         assertEquals(expResult, result);
     }
+    
+    @Test(expected = NullException.class)
+    public void testMaxPriceElectrodeviceNull() throws NullException {
+        LOG.info("maxPriceElectrodevice");
+
+        Electrodevice expResult = null;
+        Electrodevice result = DeviceExpert.maxPriceElectrodevice(null);
+        assertEquals(expResult, result);
+    }
 
     @Test
-    public void testMinPriceElectrodevice() {
+    public void testMinPriceElectrodevice() throws NullException {
         LOG.info("minPriceElectrodevice");
 
         Electrodevice expResult = coffeeGrinder2;
@@ -131,8 +238,17 @@ public class DeviceExpertTest {
         assertEquals(expResult, result);
     }
 
+    @Test(expected = NullException.class)
+    public void testMinPriceElectrodeviceNull() throws NullException {
+        LOG.info("maxPriceElectrodevice");
+
+        Electrodevice expResult = null;
+        Electrodevice result = DeviceExpert.minPriceElectrodevice(null);
+        assertEquals(expResult, result);
+    }
+    
     @Test
-    public void testMaxPowerElectrodevice() {
+    public void testMaxPowerElectrodevice() throws NullException {
         LOG.info("maxPowerElectrodevice");
 
         Electrodevice expResult = vacoomCleaner2;
@@ -140,8 +256,17 @@ public class DeviceExpertTest {
         assertEquals(expResult, result);
     }
 
+    @Test(expected = NullException.class)
+    public void testMaxPowerElectrodeviceNull() throws NullException {
+        LOG.info("maxPriceElectrodevice");
+
+        Electrodevice expResult = null;
+        Electrodevice result = DeviceExpert.maxPowerElectrodevice(null);
+        assertEquals(expResult, result);
+    }
+    
     @Test
-    public void testMinPowerElectrodevice() {
+    public void testMinPowerElectrodevice() throws NullException {
         LOG.info("minPowerElectrodevice");
 
         Electrodevice expResult = coffeeGrinder2;
@@ -149,4 +274,12 @@ public class DeviceExpertTest {
         assertEquals(expResult, result);
     }
 
+    @Test(expected = NullException.class)
+    public void testMinPowerElectrodeviceNull() throws NullException {
+        LOG.info("maxPriceElectrodevice");
+
+        Electrodevice expResult = null;
+        Electrodevice result = DeviceExpert.minPowerElectrodevice(null);
+        assertEquals(expResult, result);
+    }
 }
